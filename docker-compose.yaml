@@ -1,0 +1,42 @@
+services:
+  app:
+    build: .
+    container_name: app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    ports:
+      - 5000:5000
+    networks:
+      - flask_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:5000/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    env_file:
+      - .env
+    volumes:
+      - cache_data:/data
+    ports:
+      - 6378:${REDIS_PORT}
+    networks:
+      - flask_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+
+networks:
+  flask_net:
+    driver: bridge
+
+volumes:
+  cache_data: {}
