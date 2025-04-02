@@ -23,10 +23,49 @@ cp .env-example .env
 ```
 You can change `.env` file parameters value at any time as you wish.
 
-## Launch
+## Launch project
 
-1. Launch the project with Docker
+1. Launch the app with Docker
 
 ```shell
 docker compose up --build -d
+```
+
+## API Endpoints
+
+1. GET /ping → Check flask app liveness
+
+Request
+```shell
+curl -X 'GET' \
+  'http://127.0.0.1:5000/ping' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json'
+```
+
+Response
+```shell
+{"status":"ok"}
+```
+
+2. GET /count → Return visit count
+
+Request
+```shell
+curl -X 'GET' \
+  'http://127.0.0.1:5000/count' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json'
+```
+
+Response
+```shell
+{"visit_count": 12}
+```
+
+## Stop project
+1. Stop and remove containers, networks
+
+```shell
+docker compose down
 ```
