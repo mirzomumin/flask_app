@@ -2,6 +2,22 @@
 
 The Flask app with Redis - caching service and containerization with Docker
 
+## Structure
+
+```shell
+flask_app/
+│── .dockerignore       # List of Docker ignore folders/files
+│── .env-example        # Environment variables example
+│── .gitignore          # List of git ignore folders/files
+│── app.py              # Flask entry point
+│── configs.py          # Project configs
+│── Dockerfile          # Source code of container image
+│── docker-compose.yaml # Config for multi-container setup
+│── gunicorn.conf.py    # Gunicorn server configs
+│── requirements.txt    # Dependencies
+│── README.md           # Documentation
+```
+
 ## Set Up
 
 1. Clone the project repository
